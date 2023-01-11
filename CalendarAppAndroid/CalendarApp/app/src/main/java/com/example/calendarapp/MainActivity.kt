@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(applicationContext,"Hello There", Toast.LENGTH_SHORT).show()
 
         textView?.text = "You Pressed the Button!"
+        finish()
     }
 
 }
