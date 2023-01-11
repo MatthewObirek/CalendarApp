@@ -14,7 +14,9 @@ import androidx.core.content.res.ComplexColorCompat.inflate
 
 class Navigation {
     constructor(viewGroup: ViewGroup, appCompatActivity: AppCompatActivity) {
-        val view: View = LayoutInflater.inflate(R.layout.navigation, null)
+
+        val inflater = LayoutInflater.from(viewGroup.context);
+        val view: View = inflater.inflate(R.layout.navigation, null)
 
         val addEventTask = view.findViewById<ImageButton>(R.id.addEventTask)
 
