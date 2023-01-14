@@ -1,22 +1,101 @@
 package com.example.calendarapp
 
+import android.R
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.resources.Compatibility.Api21Impl.inflate
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.content.ContextCompat.startActivity
-import androidx.core.content.res.ColorStateListInflaterCompat.inflate
-import androidx.core.content.res.ComplexColorCompat.inflate
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 class Navigation {
+    //lateinit var bottomNavigationView : BottomNavigationView
     constructor(viewGroup: ViewGroup, appCompatActivity: AppCompatActivity) {
+        // Initialize and assign variable
+        //bottomNavigationView  = viewGroup.findViewById<BottomNavigationView>(com.example.calendarapp.R.id.navigation)
+        val bottomNavigationView: BottomNavigationView by lazy {
+            viewGroup.findViewById(com.example.calendarapp.R.id.bottom_navigation)
+        }
+        // Set Home selected
+        when (appCompatActivity::class) {
+            MainActivity::class -> {
+                bottomNavigationView.selectedItemId = com.example.calendarapp.R.id.toDayButton
+            }
+            CalendarActivity::class -> {
+                bottomNavigationView.selectedItemId = com.example.calendarapp.R.id.toCalendarButton
+            }
+            TaskActivity::class -> {
+                bottomNavigationView.selectedItemId = com.example.calendarapp.R.id.toTaskButton
+            }
+            SettingsActivity::class -> {
+                bottomNavigationView.selectedItemId = com.example.calendarapp.R.id.toSettingsButton
+            }
+        }
 
-        val inflater = LayoutInflater.from(viewGroup.context);
-        val view: View = inflater.inflate(R.layout.navigation, null)
+        // Perform item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                com.example.calendarapp.R.id.toDayButton -> {
+                    if(appCompatActivity != MainActivity::class) {
+                        appCompatActivity.startActivity(
+                            Intent(
+                                appCompatActivity,
+                                MainActivity::class.java
+                            )
+                        )
+                    }
+                    appCompatActivity.overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
+                com.example.calendarapp.R.id.toCalendarButton -> {
+                    if(appCompatActivity != CalendarActivity::class) {
+                        appCompatActivity.startActivity(
+                            Intent(
+                                appCompatActivity,
+                                CalendarActivity::class.java
+                            )
+                        )
+                        appCompatActivity.overridePendingTransition(0, 0)
+                        return@OnNavigationItemSelectedListener true
+                    }
+                }
+                com.example.calendarapp.R.id.addEventTask -> return@OnNavigationItemSelectedListener true
+                com.example.calendarapp.R.id.toTaskButton -> {
+                    if(appCompatActivity != TaskActivity::class) {
+                        appCompatActivity.startActivity(
+                            Intent(
+                                appCompatActivity,
+                                TaskActivity::class.java
+                            )
+                        )
+                    }
+                    appCompatActivity.overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
+                com.example.calendarapp.R.id.toSettingsButton-> {
+                    if(appCompatActivity != TaskActivity::class) {
+                        appCompatActivity.startActivity(
+                            Intent(
+                                appCompatActivity,
+                                SettingsActivity::class.java
+                            )
+                        )
+                    }
+                    appCompatActivity.overridePendingTransition(0, 0)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        })
+/*
+
+        view.id = View.generateViewId()
 
         val addEventTask = view.findViewById<ImageButton>(R.id.addEventTask)
 
@@ -30,26 +109,42 @@ class Navigation {
 
         }
         toDayButton.setOnClickListener{
-            val intent: Intent = Intent(appCompatActivity, DayActivity::class.java)
-            appCompatActivity.startActivity(intent)
-            appCompatActivity.finish()
+            if(appCompatActivity != DayActivity::class) {
+                val intent: Intent = Intent(appCompatActivity, DayActivity::class.java)
+                appCompatActivity.startActivity(intent)
+                appCompatActivity.finish()
+            }
         }
         toCalendarButton.setOnClickListener{
-            val intent: Intent = Intent(appCompatActivity, CalendarActivity::class.java)
-            appCompatActivity.startActivity(intent)
-            appCompatActivity.finish()
+            if(appCompatActivity != CalendarActivity::class) {
+                val intent: Intent = Intent(appCompatActivity, CalendarActivity::class.java)
+                appCompatActivity.startActivity(intent)
+                appCompatActivity.finish()
+            }
         }
         toTaskButton.setOnClickListener{
-            val intent: Intent = Intent(appCompatActivity, TaskActivity::class.java)
-            appCompatActivity.startActivity(intent)
-            appCompatActivity.finish()
+            if(appCompatActivity != TaskActivity::class) {
+                val intent: Intent = Intent(appCompatActivity, TaskActivity::class.java)
+                appCompatActivity.startActivity(intent)
+                appCompatActivity.finish()
+            }
         }
         toSettingsButton.setOnClickListener{
-            val intent: Intent = Intent(appCompatActivity, SettingsActivity::class.java)
-            appCompatActivity.startActivity(intent)
-            appCompatActivity.finish()
+            if(appCompatActivity != SettingsActivity::class) {
+                val intent: Intent = Intent(appCompatActivity, SettingsActivity::class.java)
+                appCompatActivity.startActivity(intent)
+                appCompatActivity.finish()
+            }
         }
 
         viewGroup.addView(view)
+        // Create a ConstraintSet
+        val constraintSet = ConstraintSet()
+
+        // Connect the bottom of the text view to the bottom of the parent layout
+        constraintSet.connect(view.id, ConstraintSet.BOTTOM, viewGroup.id, ConstraintSet.BOTTOM)
+
+        // Apply the constraints
+        constraintSet.applyTo(viewGroup as ConstraintLayout?)*/
     }
 }

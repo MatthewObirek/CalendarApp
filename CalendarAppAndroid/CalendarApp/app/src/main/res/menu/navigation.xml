@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/toDayButton"
+        android:title="Today"
+        android:icon="@android:drawable/ic_menu_add" />
+    <item
+        android:id="@+id/toCalendarButton"
+        android:title="Calendar"
+        android:icon="@android:drawable/ic_menu_add" />
+    <item
+        android:id="@+id/addEventTask"
+        android:title="Add"
+        android:icon="@android:drawable/ic_menu_add" />
+    <item
+        android:id="@+id/toTaskButton"
+        android:title="Task"
+        android:icon="@android:drawable/ic_menu_add" />
+    <item
+        android:id="@+id/toSettingsButton"
+        android:title="Settings"
+        android:icon="@android:drawable/ic_menu_add" />
+
+
+</menu>
